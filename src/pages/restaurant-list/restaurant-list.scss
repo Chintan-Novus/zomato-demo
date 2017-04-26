@@ -1,0 +1,48 @@
+page-restaurant-list {
+
+  ion-card.res-main {
+    .res-img {
+
+    }
+
+    .res-content {
+      padding-top: 0;
+      padding-bottom: 0;
+
+      .res-title {
+        color: color($colors, title);
+        font-weight: bold;
+      }
+
+      .res-sub-title {
+        color: color($colors, normal-label);
+
+        &.main {
+          font-weight: bold;
+        }
+
+        .res-category {
+
+        }
+
+        .res-ratting {
+          float: right;
+          background: #008000;
+          width: 15%;
+          text-align: center;
+          border-radius: 5px;
+          font-size: 1.2em;
+          font-weight: bold;
+          color: #fff;
+        }
+      }
+    }
+
+    .res-btn-group-row {
+      button {
+        width: 100%;
+        color: #000000;
+      }
+    }
+  }
+}

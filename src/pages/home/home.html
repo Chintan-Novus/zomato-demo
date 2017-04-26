@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-navbar color="novus">
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card class="category">
+    <ion-card-header>
+      <p class="title">Quick Searches</p>
+      <p class="desc">Discover restaurants by type of meal</p>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card class="category">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <div *ngFor="let category of categories" class="main-cat" col-3 (click)="gotoRestaturantList(category)">
+            <div class="cat-img">
+              <img src="assets/img/collection/{{category.image}}"/>
+            </div>
+            <div class="cat-name">
+              {{category.name}}
+            </div>
+          </div>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="category">
+    <ion-card-header>
+      <p class="title">Collections</p>
+      <p class="desc collection" text-wrap>Explore curated lists of top restaurants, cafes, pubs, and bars in and around
+        your city, based on trends</p>
+    </ion-card-header>
+
+  </ion-card>
+
+  <div class="home-main">
+    <div class="collections">
+
+      <div class="collections-items">
+
+        <ion-card *ngFor="let collection of collections" (click)="gotoRestaturantList(collection)">
+          <div class="card-img">
+            <img src="{{collection.image}}"/>
+          </div>
+          <div class="card-main">
+            <div class="card-title">{{collection.name}}</div>
+            <div class="card-subtitle">{{collection.desc}}</div>
+          </div>
+        </ion-card>
+
+      </div>
+    </div>
+  </div>
+
+</ion-content>

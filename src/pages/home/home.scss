@@ -1,0 +1,95 @@
+page-home {
+  .category {
+
+    ion-card-header {
+      .title {
+        font-size: 1.6em;
+        font-weight: bold;
+        color: color($colors, main-label);
+      }
+
+      .desc {
+        font-size: 0.8em;
+        color: color($colors, desc-label);
+
+        &.collection {
+          font-size: 0.8em;
+        }
+      }
+    }
+
+    .main-cat {
+      //background-color: red;
+      //border-radius: 10px;
+
+      .cat-img {
+
+      }
+
+      .cat-name {
+        text-align: center;
+        color: #000;
+        font-weight: bold;
+        font-size: 1em;
+      }
+    }
+
+    .collection-content {
+      display: grid;
+    }
+  }
+
+  .home-main {
+    .collections {
+      .home-title {
+        font-size: 2.0em;
+        width: 100%;
+        font-weight: bold;
+        color: #000000;
+        text-align: left;
+        background: $novusColor;
+
+        p {
+          margin-top: 0;
+          margin-bottom: 5px;
+          text-align: center;
+          color: #fff;
+        }
+      }
+
+      .collections-items {
+        ion-card {
+          position: relative;
+          border-radius: 10px !important;
+
+          .card-main {
+            position: absolute;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.6);
+            width: 100%;
+            height: 45px;
+
+            .card-title {
+              font-size: 1.6em;
+              width: 100%;
+              font-weight: bold;
+              color: color($colors, main-label);
+              text-align: left;
+              position: relative;
+              left: 5px;
+            }
+
+            .card-subtitle {
+              font-size: 1.0em;
+              width: 100%;
+              color: color($colors, desc-label);
+              text-align: left;
+              left: 5px;
+              position: relative;
+            }
+          }
+        }
+      }
+    }
+  }
+}

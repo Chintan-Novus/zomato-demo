@@ -1,0 +1,66 @@
+page-restaurant-details {
+
+  ion-card.res-main {
+    margin: 0;
+    width: 100%;
+
+    &.sub {
+      margin-top: 5px;
+    }
+
+    .res-content {
+      padding-top: 0;
+
+      .title {
+        color: color($colors, title);
+        font-weight: bold;
+
+        .sub-title {
+          color: color($colors, desc-label);
+          font-weight: 500;
+          font-size: 0.8em;
+        }
+      }
+
+      .map-link {
+        color: blue;
+      }
+
+      .area {
+        color: color($colors, normal-label);
+        font-weight: bold;
+      }
+
+      .category {
+        color: color($colors, normal-label);
+        font-weight: bold;
+      }
+
+      .ratting-main {
+        .ratting {
+          display: flex;
+          justify-content: center;
+          background: #008000;
+          text-align: center;
+          border-radius: 5px;
+          font-size: 1.2em;
+          font-weight: bold;
+          color: #fff;
+        }
+
+        .votes {
+
+        }
+      }
+
+      .list-label {
+        font-size: 1.4em;
+        font-weight: bold;
+      }
+
+      .order-list {
+        margin: 0;
+      }
+    }
+  }
+}

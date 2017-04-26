@@ -1,0 +1,55 @@
+page-collection-list {
+  .home-main {
+    .collections {
+      .home-title {
+        font-size: 2.0em;
+        width: 100%;
+        font-weight: bold;
+        color: #000000;
+        text-align: left;
+        background: $novusColor;
+
+        p {
+          margin-top: 0;
+          margin-bottom: 5px;
+          text-align: center;
+          color: #fff;
+        }
+      }
+
+      .collections-items {
+        ion-card {
+          position: relative;
+          border-radius: 10px !important;
+
+          .card-main {
+            position: absolute;
+            bottom: 0px;
+            background: rgba(255, 255, 255, 0.6);
+            width: 100%;
+            height: 55px;
+
+            .card-title {
+              font-size: 2.0em;
+              width: 100%;
+              font-weight: bold;
+              color: #000000;
+              text-align: left;
+              position: relative;
+              left: 5px;
+            }
+
+            .card-subtitle {
+              font-size: 1.0em;
+              width: 100%;
+              color: #000000;
+              text-align: left;
+              left: 5px;
+              position: relative;
+            }
+          }
+        }
+      }
+    }
+  }
+}
