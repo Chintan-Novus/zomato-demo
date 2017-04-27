@@ -14,6 +14,8 @@ export class HomePage {
 
   private categories: any = []
   private collections: any = []
+  private cuisines: any = []
+  private establishments: any = []
 
   private userLocation: any = {
     latitude: '',
@@ -33,7 +35,9 @@ export class HomePage {
 
   private loading = {
     category: true,
-    collection: true
+    collection: true,
+    cuisines: true,
+    establishments: true
   }
 
   constructor(public navCtrl: NavController, private geolocation: Geolocation, private apiService: ApiServices) {
@@ -61,6 +65,7 @@ export class HomePage {
     that.apiService.getGeoCode(that.userLocation).subscribe(result => {
       that.geoCodeData = result
 
+      that.getCuisines()
       that.getCollectionList()
     }, error => {
       console.log(error);
@@ -90,17 +95,22 @@ export class HomePage {
         index++
       }
       that.categories = result.categories
-      console.log(that.categories);
-      //
-      // that.categories = result.categories.map(function (obj, key) {
-
-      //   return obj
-      // })
-      // console.log(that.categories);
     }, error => {
       console.log(error);
     }, () => {
       that.loading.category = false
+    })
+  }
+
+  getCuisines() {
+    let that = this
+    that.apiService.getCuisines(that.geoCodeData.location.city_id).subscribe(result => {
+      that.cuisines = result.cuisines
+      console.log(that.cuisines);
+    }, error => {
+      console.log(error);
+    }, () => {
+      that.loading.cuisines = false
     })
   }
 
@@ -115,6 +125,9 @@ export class HomePage {
       this.searchObj.collection_id = category.collection.collection_id
     } else if (type == 'category') {
       this.searchObj.category = category.id
+    } else if (type == 'cuisines') {
+      this.searchObj.cuisines = category.cuisine_id
+      category.name = category.cuisine_name
     }
 
     this.navCtrl.push(RestaurantList, {

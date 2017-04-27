@@ -16,9 +16,6 @@ export class ApiServices {
   private userKey: string = "325286aa2df54428845e2a02021f34f8";
 
   constructor(public http: Http) {
-    console.log(this.baseURL);
-    console.log('Hello ApiServices Provider');
-
     let headers = new Headers({'Accept': 'application/json'});
     this.options = new RequestOptions({headers: headers});
     this.options.headers.set('user-key', `${this.userKey}`);
@@ -34,6 +31,14 @@ export class ApiServices {
 
   getCollections(locationId) {
     return this.http.get(`${this.baseURL}collections?city_id=` + locationId, this.options).map(res => res.json());
+  }
+
+  getCuisines(locationId) {
+    return this.http.get(`${this.baseURL}cuisines?city_id=` + locationId, this.options).map(res => res.json());
+  }
+
+  getEstablishments(locationId) {
+    return this.http.get(`${this.baseURL}establishments?city_id=` + locationId, this.options).map(res => res.json());
   }
 
   search(searchObj) {
