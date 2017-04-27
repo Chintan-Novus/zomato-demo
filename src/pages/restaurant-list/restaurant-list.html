@@ -6,19 +6,19 @@
 
 <ion-content>
 
-  <ion-card class="res-main" *ngFor="let restaurant of restaurants">
+  <ion-card class="res-main" *ngFor="let restaurant of restaurants.restaurants">
 
-    <img class="res-img" src="{{restaurant.image}}"/>
+    <img class="res-img" src="{{restaurant.restaurant.thumb}}"/>
 
-    <ion-card-content class="res-content" (click)="detailsPage(restaurant)">
+    <ion-card-content class="res-content" (click)="detailsPage(restaurant.restaurant)">
       <ion-card-title class="res-title">
-        {{restaurant.name}}
+        {{restaurant.restaurant.name}}
       </ion-card-title>
-      <p class="res-sub-title main">{{restaurant.location.locality}} -
-        <span class="res-category">{{restaurant.cuisines}}</span>
-        <span class="res-ratting">{{restaurant.user_rating.aggregate_rating}}/5</span>
+      <p class="res-sub-title main">{{restaurant.restaurant.location.locality}} -
+        <span class="res-category">{{restaurant.restaurant.cuisines}}</span>
+        <span class="res-ratting">{{restaurant.restaurant.user_rating.aggregate_rating}}/5</span>
       </p>
-      <p class="res-sub-title">{{restaurant.location.address}}</p>
+      <p class="res-sub-title">{{restaurant.restaurant.location.address}}</p>
     </ion-card-content>
 
     <ion-row class="res-btn-group-row">

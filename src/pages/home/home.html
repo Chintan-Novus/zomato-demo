@@ -13,16 +13,21 @@
     </ion-card-header>
   </ion-card>
 
-  <ion-card class="category">
+  <div text-center *ngIf="loading.category">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <ion-card class="category" *ngIf="categories.length > 0">
     <ion-card-content>
       <ion-grid>
         <ion-row>
-          <div *ngFor="let category of categories" class="main-cat" col-3 (click)="gotoRestaturantList(category)">
+          <div *ngFor="let category of categories" class="main-cat" col-3
+               (click)="gotoRestaturantList(category.categories, 'category')">
             <div class="cat-img">
-              <img src="assets/img/collection/{{category.image}}"/>
+              <img src="https://b.zmtcdn.com/images/search_tokens/app_icons/category_{{category.categories.id}}.png"/>
             </div>
             <div class="cat-name">
-              {{category.name}}
+              {{category.categories.name}}
             </div>
           </div>
         </ion-row>
@@ -39,18 +44,22 @@
 
   </ion-card>
 
-  <div class="home-main">
+  <div text-center *ngIf="loading.collection">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <div class="home-main" *ngIf="collections.collections">
     <div class="collections">
 
       <div class="collections-items">
-
-        <ion-card *ngFor="let collection of collections" (click)="gotoRestaturantList(collection)">
+        <ion-card *ngFor="let collection of collections.collections"
+                  (click)="gotoRestaturantList(collection, 'collection')">
           <div class="card-img">
-            <img src="{{collection.image}}"/>
+            <img src="{{collection.collection.image_url}}"/>
           </div>
           <div class="card-main">
-            <div class="card-title">{{collection.name}}</div>
-            <div class="card-subtitle">{{collection.desc}}</div>
+            <div class="card-title">{{collection.collection.title}}</div>
+            <div class="card-subtitle">{{collection.collection.description}}</div>
           </div>
         </ion-card>
 

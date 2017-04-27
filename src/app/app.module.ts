@@ -9,6 +9,10 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {CollectionList} from "../pages/collection-list/collection-list";
 import {RestaurantList} from "../pages/restaurant-list/restaurant-list";
 import {RestaurantDetails} from "../pages/restaurant-details/restaurant-details";
+import {ApiServices} from "../providers/api-services";
+import {HttpModule} from "@angular/http";
+import {Geolocation} from '@ionic-native/geolocation';
+
 
 @NgModule({
   declarations: [
@@ -20,6 +24,7 @@ import {RestaurantDetails} from "../pages/restaurant-details/restaurant-details"
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -33,6 +38,8 @@ import {RestaurantDetails} from "../pages/restaurant-details/restaurant-details"
   providers: [
     StatusBar,
     SplashScreen,
+    ApiServices,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

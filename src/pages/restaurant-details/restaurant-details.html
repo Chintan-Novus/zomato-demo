@@ -10,7 +10,7 @@
 <ion-content>
   <ion-card class="res-main">
 
-    <img class="res-img" src="{{restaurantData.image}}"/>
+    <img class="res-img" src="{{restaurantData.thumb}}"/>
 
     <ion-card-content class="res-content">
       <ion-card-title class="title">
@@ -21,7 +21,8 @@
         <ion-row>
           <ion-col col-9>
             <span class="area">{{restaurantData.location.locality}}</span>
-            <span class="category"> - {{restaurantData.establishment_types.establishment_type.name}}</span>
+            <span class="category"
+                  *ngIf="restaurantData.establishment_types && restaurantData.establishment_types.length"> - {{restaurantData.establishment_types.establishment_type.name}}</span>
           </ion-col>
           <ion-col col-3 text-center>
             <span class="ratting-main">
@@ -41,7 +42,7 @@
         Cuisines
       </ion-card-title>
       <ul class="order-list">
-        <li *ngFor="let cuisines of restaurantData.cuisines.split(',')">{{cuisines.trim()}}</li>
+        <li *ngFor="let cuisine of restaurantData.cuisines.split(',')">{{cuisine.trim()}}</li>
       </ul>
     </ion-card-content>
   </ion-card>

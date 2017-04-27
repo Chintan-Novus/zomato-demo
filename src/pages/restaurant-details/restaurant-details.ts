@@ -17,6 +17,7 @@ export class RestaurantDetails {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.restaurantData = this.navParams.data.restaurant
+    console.log(this.restaurantData);
   }
 
 }
