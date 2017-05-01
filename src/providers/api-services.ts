@@ -22,7 +22,7 @@ export class ApiServices {
   }
 
   getGeoCode(locationObj) {
-    return this.http.get(`${this.baseURL}geocode?lat=` + locationObj.latitude + `&lon=` + locationObj.longitude, this.options).map(res => res.json());
+    return this.http.get(`${this.baseURL}geocode?lat=` + locationObj.coords.latitude + `&lon=` + locationObj.coords.longitude, this.options).map(res => res.json());
   }
 
   getCategories() {

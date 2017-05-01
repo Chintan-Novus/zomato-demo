@@ -5,12 +5,20 @@
 </ion-header>
 
 <ion-content>
+  <div text-center *ngIf="dataIsLoading">
+    <ion-spinner></ion-spinner>
+  </div>
 
-  <ion-card class="res-main" *ngFor="let restaurant of restaurants.restaurants">
+  <ion-card *ngIf="!dataIsLoading && !restaurants.restaurants.length">
+    <ion-card-content text-center>No Data Found</ion-card-content>
+  </ion-card>
+
+  <ion-card class="res-main" *ngFor="let restaurant of restaurants.restaurants"
+            (click)="detailsPage(restaurant.restaurant)">
 
     <img class="res-img" src="{{restaurant.restaurant.thumb}}"/>
 
-    <ion-card-content class="res-content" (click)="detailsPage(restaurant.restaurant)">
+    <ion-card-content class="res-content">
       <ion-card-title class="res-title">
         {{restaurant.restaurant.name}}
       </ion-card-title>

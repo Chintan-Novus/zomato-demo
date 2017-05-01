@@ -4,7 +4,7 @@ import {CollectionList} from "../collection-list/collection-list";
 import {RestaurantList} from "../restaurant-list/restaurant-list";
 import {ApiServices} from "../../providers/api-services";
 import {Geolocation} from '@ionic-native/geolocation';
-
+import 'rxjs/add/operator/toPromise'
 
 @Component({
   selector: 'page-home',
@@ -15,14 +15,6 @@ export class HomePage {
   private categories: any = []
   private collections: any = []
   private cuisines: any = []
-  private establishments: any = []
-
-  private userLocation: any = {
-    latitude: '',
-    longitude: ''
-  }
-
-  private geoCodeData: any;
 
   private searchObj = {
     entity_id: '',
@@ -41,42 +33,33 @@ export class HomePage {
   }
 
   constructor(public navCtrl: NavController, private geolocation: Geolocation, private apiService: ApiServices) {
-    let that = this
-
-    that.getMyLocation()
-    that.getCategory()
   }
 
-  getMyLocation() {
-    let that = this
-    that.geolocation.getCurrentPosition().then((resp) => {
-
-      that.userLocation.latitude = resp.coords.latitude;
-      that.userLocation.longitude = resp.coords.longitude
-
-      that.getGeoCodeData()
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-  }
-
-  getGeoCodeData() {
-    let that = this
-    that.apiService.getGeoCode(that.userLocation).subscribe(result => {
-      that.geoCodeData = result
-
-      that.getCuisines()
-      that.getCollectionList()
-    }, error => {
-      console.log(error);
+  ionViewDidLoad() {
+    let that = this;
+    this.getMyLocation().then(geoLoc => {
+      return that.getGeoCodeData(geoLoc)
+    }).then(result => {
+      this.searchObj.entity_id = result.location.city_id
+      that.getCollectionList(result)
     })
+    this.getCategory()
   }
 
-  getCollectionList() {
+  getMyLocation(): Promise<any> {
     let that = this
-    that.apiService.getCollections(that.geoCodeData.location.city_id).subscribe(result => {
+    return that.geolocation.getCurrentPosition()
+  }
+
+  getGeoCodeData(geoLocation): Promise<any> {
+    let that = this
+    return that.apiService.getGeoCode(geoLocation).toPromise()
+  }
+
+  getCollectionList(result) {
+    let that = this
+    that.apiService.getCollections(result.location.city_id).subscribe(result => {
       that.collections = result
-      console.log(that.collections);
     }, error => {
       console.log(error);
     }, () => {
@@ -102,11 +85,10 @@ export class HomePage {
     })
   }
 
-  getCuisines() {
+  getCuisines(result) {
     let that = this
-    that.apiService.getCuisines(that.geoCodeData.location.city_id).subscribe(result => {
+    that.apiService.getCuisines(result.location.city_id).subscribe(result => {
       that.cuisines = result.cuisines
-      console.log(that.cuisines);
     }, error => {
       console.log(error);
     }, () => {
@@ -119,10 +101,9 @@ export class HomePage {
   }
 
   gotoRestaturantList(category, type) {
-    this.searchObj.entity_id = this.geoCodeData.location.city_id
-
     if (type == 'collection') {
       this.searchObj.collection_id = category.collection.collection_id
+      category.name = category.collection.title
     } else if (type == 'category') {
       this.searchObj.category = category.id
     } else if (type == 'cuisines') {
@@ -132,7 +113,8 @@ export class HomePage {
 
     this.navCtrl.push(RestaurantList, {
       category: category,
-      searchObj: this.searchObj
+      searchObj: this.searchObj,
+      title: category.name
     })
   }
 }

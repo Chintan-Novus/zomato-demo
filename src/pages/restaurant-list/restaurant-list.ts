@@ -12,21 +12,21 @@ export class RestaurantList {
   private title: string
   private restaurants: any = []
   private searchObj;
+  private dataIsLoading: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private apiService: ApiServices) {
     this.searchObj = this.navParams.data.searchObj
-    this.title = this.navParams.data.category.name
-
-    this.search()
+    this.title = this.navParams.data.title
   }
 
-  search() {
+  ionViewDidLoad() {
     let that = this
     that.apiService.search(that.searchObj).subscribe(result => {
       that.restaurants = result
-      console.log(that.restaurants);
     }, error => {
       console.log(error);
+    }, () => {
+      that.dataIsLoading = false;
     })
   }
 
