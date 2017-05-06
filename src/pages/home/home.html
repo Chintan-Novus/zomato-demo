@@ -11,15 +11,12 @@
       <p class="title">Quick Searches</p>
       <p class="desc">Discover restaurants by type of meal</p>
     </ion-card-header>
-  </ion-card>
 
-  <div text-center *ngIf="loading.category">
-    <ion-spinner></ion-spinner>
-  </div>
-
-  <ion-card class="category" *ngIf="categories.length > 0">
     <ion-card-content>
-      <ion-grid>
+      <div text-center *ngIf="loading.category">
+        <ion-spinner></ion-spinner>
+      </div>
+      <ion-grid *ngIf="categories.length > 0">
         <ion-row>
           <div *ngFor="let category of categories" class="main-cat" col-3
                (click)="gotoRestaturantList(category.categories, 'category')">

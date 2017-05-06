@@ -13,6 +13,7 @@ import {ApiServices} from "../providers/api-services";
 import {HttpModule} from "@angular/http";
 import {Geolocation} from '@ionic-native/geolocation';
 import {IonicStorageModule} from "@ionic/storage";
+import {LaunchNavigator} from "@ionic-native/launch-navigator";
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import {IonicStorageModule} from "@ionic/storage";
     SplashScreen,
     ApiServices,
     Geolocation,
+    LaunchNavigator,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

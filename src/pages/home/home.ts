@@ -19,11 +19,14 @@ export class HomePage {
 
   private searchObj = {
     entity_id: '',
-    entity_type: 'city',
+    entity_type: '',
     category: '',
     collection_id: '',
     cuisines: '',
-    establishment_type: ''
+    establishment_type: '',
+    lat: '',
+    lon: '',
+    radius: 10000
   }
 
   private loading = {
@@ -51,10 +54,13 @@ export class HomePage {
     });
 
     this.getMyLocation().then(geoLoc => {
-      return that.getGeoCodeData(geoLoc)
+      // return that.getGeoCodeData(geoLoc)
+      that.searchObj.lat = geoLoc.coords.latitude
+      that.searchObj.lon = geoLoc.coords.longitude
+      that.getCollectionList(geoLoc)
     }).then(result => {
-      this.searchObj.entity_id = result.location.city_id
-      that.getCollectionList(result)
+      // this.searchObj.entity_id = result.location.city_id
+      // that.getCollectionList(result)
     })
   }
 
@@ -68,9 +74,9 @@ export class HomePage {
     return that.apiService.getGeoCode(geoLocation).toPromise()
   }
 
-  getCollectionList(result) {
+  getCollectionList(geoLoc) {
     let that = this
-    that.apiService.getCollections(result.location.city_id).subscribe(result => {
+    that.apiService.getCollections(geoLoc).subscribe(result => {
       that.collections = result
     }, error => {
       console.log(error);

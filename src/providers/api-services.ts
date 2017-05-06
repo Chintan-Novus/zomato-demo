@@ -29,8 +29,9 @@ export class ApiServices {
     return this.http.get(`${this.baseURL}categories`, this.options).map(res => res.json());
   }
 
-  getCollections(locationId) {
-    return this.http.get(`${this.baseURL}collections?city_id=` + locationId, this.options).map(res => res.json());
+  getCollections(locationObj) {
+    // return this.http.get(`${this.baseURL}collections?city_id=` + locationId, this.options).map(res => res.json());
+    return this.http.get(`${this.baseURL}collections?lat=` + locationObj.coords.latitude + `&lon=` + locationObj.coords.longitude, this.options).map(res => res.json());
   }
 
   getCuisines(locationId) {
@@ -42,7 +43,7 @@ export class ApiServices {
   }
 
   search(searchObj) {
-    return this.http.get(`${this.baseURL}search?entity_id=` + searchObj.entity_id + `&entity_type=` + searchObj.entity_type + `&category=` + searchObj.category + `&collection_id=` + searchObj.collection_id + `&cuisines=` + searchObj.cuisines + `&establishment_type=` + searchObj.establishment_type, this.options).map(res => res.json());
+    return this.http.get(`${this.baseURL}search?entity_id=` + searchObj.entity_id + `&entity_type=` + searchObj.entity_type + `&category=` + searchObj.category + `&collection_id=` + searchObj.collection_id + `&cuisines=` + searchObj.cuisines + `&establishment_type=` + searchObj.establishment_type + `&lat=` + searchObj.lat + `&lon=` + searchObj.lon + `&radius=` + searchObj.radius, this.options).map(res => res.json());
   }
 
 }
