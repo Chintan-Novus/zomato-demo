@@ -12,6 +12,7 @@ import {RestaurantDetails} from "../pages/restaurant-details/restaurant-details"
 import {ApiServices} from "../providers/api-services";
 import {HttpModule} from "@angular/http";
 import {Geolocation} from '@ionic-native/geolocation';
+import {IonicStorageModule} from "@ionic/storage";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {Geolocation} from '@ionic-native/geolocation';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

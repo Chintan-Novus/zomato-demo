@@ -75,16 +75,19 @@
     <div class="collections">
 
       <div class="collections-items">
-        <ion-card *ngFor="let collection of collections.collections"
-                  (click)="gotoRestaturantList(collection, 'collection')">
-          <div class="card-img">
-            <img src="{{collection.collection.image_url}}"/>
-          </div>
-          <div class="card-main">
-            <div class="card-title">{{collection.collection.title}}</div>
-            <div class="card-subtitle">{{collection.collection.description}}</div>
-          </div>
-        </ion-card>
+        <ion-slides autoplay loop="true" slidesPerView="1">
+          <ion-slide *ngFor="let collection of collections.collections">
+            <ion-card (click)="gotoRestaturantList(collection, 'collection')">
+              <div class="card-img">
+                <img src="{{collection.collection.image_url}}"/>
+              </div>
+              <div class="card-main">
+                <div class="card-title">{{collection.collection.title}}</div>
+                <div class="card-subtitle">{{collection.collection.description}}</div>
+              </div>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
 
       </div>
     </div>

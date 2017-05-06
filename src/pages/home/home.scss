@@ -58,34 +58,40 @@ page-home {
       }
 
       .collections-items {
-        ion-card {
-          position: relative;
-          border-radius: 10px !important;
+        ion-slides {
+          ion-slide {
+            width: 70% !important;
 
-          .card-main {
-            position: absolute;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.6);
-            width: 100%;
-            height: 45px;
-
-            .card-title {
-              font-size: 1.6em;
-              width: 100%;
-              font-weight: bold;
-              color: color($colors, main-label);
-              text-align: left;
+            ion-card {
               position: relative;
-              left: 5px;
-            }
+              border-radius: 10px !important;
 
-            .card-subtitle {
-              font-size: 1.0em;
-              width: 100%;
-              color: color($colors, desc-label);
-              text-align: left;
-              left: 5px;
-              position: relative;
+              .card-main {
+                position: absolute;
+                bottom: 0;
+                background: rgba(255, 255, 255, 0.6);
+                width: 100%;
+                height: 45px;
+
+                .card-title {
+                  font-size: 1.6em;
+                  width: 100%;
+                  font-weight: bold;
+                  color: color($colors, main-label);
+                  text-align: left;
+                  position: relative;
+                  left: 5px;
+                }
+
+                .card-subtitle {
+                  font-size: 1.0em;
+                  width: 100%;
+                  color: color($colors, desc-label);
+                  text-align: left;
+                  left: 5px;
+                  position: relative;
+                }
+              }
             }
           }
         }

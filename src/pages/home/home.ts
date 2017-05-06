@@ -4,6 +4,7 @@ import {CollectionList} from "../collection-list/collection-list";
 import {RestaurantList} from "../restaurant-list/restaurant-list";
 import {ApiServices} from "../../providers/api-services";
 import {Geolocation} from '@ionic-native/geolocation';
+import {Storage} from "@ionic/storage";
 import 'rxjs/add/operator/toPromise'
 
 @Component({
@@ -32,18 +33,29 @@ export class HomePage {
     establishments: true
   }
 
-  constructor(public navCtrl: NavController, private geolocation: Geolocation, private apiService: ApiServices) {
+  constructor(public navCtrl: NavController, private geolocation: Geolocation, private apiService: ApiServices, private storage: Storage) {
   }
 
   ionViewDidLoad() {
     let that = this;
+    // get category
+    that.storage.ready().then(() => {
+      that.storage.get('zomato_category').then(categories => {
+        if (categories) {
+          that.categories = categories
+          that.loading.category = false
+        } else {
+          that.getCategory()
+        }
+      })
+    });
+
     this.getMyLocation().then(geoLoc => {
       return that.getGeoCodeData(geoLoc)
     }).then(result => {
       this.searchObj.entity_id = result.location.city_id
       that.getCollectionList(result)
     })
-    this.getCategory()
   }
 
   getMyLocation(): Promise<any> {
@@ -78,6 +90,9 @@ export class HomePage {
         index++
       }
       that.categories = result.categories
+      that.storage.ready().then(() => {
+        that.storage.set('zomato_category', that.categories)
+      })
     }, error => {
       console.log(error);
     }, () => {
